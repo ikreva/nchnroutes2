@@ -28,10 +28,10 @@ ifdef ipv4-list
 endif
 
 produce:
-	curl $(proxy) -o ipv4-address-space.csv https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.csv
-	curl $(proxy) -o delegated-apnic-latest https://ftp.apnic.net/stats/apnic/delegated-apnic-latest
-	curl $(proxy) -o geoip_cn.txt https://gh.cooluc.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/cn.txt
-	curl $(proxy) -o chnroutes2.txt https://cdn.jsdelivr.net/gh/misakaio/chnroutes2/chnroutes.txt
+	curl $(proxy) --retry 5 -C - -o ipv4-address-space.csv https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.csv
+	curl $(proxy) --retry 5 -C - -o delegated-apnic-latest https://ftp.apnic.net/stats/apnic/delegated-apnic-latest
+	curl $(proxy) --retry 5 -C - -o geoip_cn.txt https://gh.cooluc.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/cn.txt
+	curl $(proxy) --retry 5 -C - -o chnroutes2.txt https://gh.cooluc.com/https://raw.githubusercontent.com/misakaio/chnroutes2/master/chnroutes.txt
 
 	python3 produce.py $(next) $(exclude) $(ipv4-list)
 	# mv routes4.conf /etc/bird/routes4.conf

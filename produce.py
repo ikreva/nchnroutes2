@@ -10,11 +10,7 @@ parser.add_argument('--exclude', metavar='CIDR', type=str, nargs='*',
 parser.add_argument('--next', default="tun0", metavar = "INTERFACE OR IP",
                     help='next hop for where non-China IP address, this is usually the tunnel interface')
 parser.add_argument('--ipv4-list', choices=['geoip', 'chnroutes2', 'apnic'], default=['geoip'], nargs='*',
-<<<<<<< HEAD
                     help='IPv4 lists to use when subtracting China based IP, multiple lists can be used at the same time (default: geoip)')
-=======
-                    help='IPv4 lists to use when subtracting China based IP, multiple lists can be used at the same time (default: geoip chnroutes2 apnic)')
->>>>>>> 9129ff6a9362081e75be5acab2adc99a6bcab3a3
 
 args = parser.parse_args()
 
@@ -106,7 +102,6 @@ with open("ipv4-address-space.csv", newline='') as f:
 
 with open("delegated-apnic-latest") as f:
     for line in f:
-<<<<<<< HEAD
 #        if 'apnic' in args.ipv4_list and "apnic|CN|ipv4|" in line:
 #            line = line.split("|")
 #            a = "%s/%d" % (line[3], 32 - math.log(int(line[4]), 2), )
@@ -114,8 +109,6 @@ with open("delegated-apnic-latest") as f:
 #            subtract_cidr(root, (a,))
 #
 #        elif "apnic|CN|ipv6|" in line:
-=======
->>>>>>> 9129ff6a9362081e75be5acab2adc99a6bcab3a3
         if "apnic|CN|ipv6|" in line:
             line = line.split("|")
             a = "%s/%s" % (line[3], line[4])

@@ -9,8 +9,8 @@ parser.add_argument('--exclude', metavar='CIDR', type=str, nargs='*',
                     help='IPv4 ranges to exclude in CIDR format')
 parser.add_argument('--next', default="tun0", metavar = "INTERFACE OR IP",
                     help='next hop for where non-China IP address, this is usually the tunnel interface')
-parser.add_argument('--ipv4-list', choices=['geoip', 'chnroutes2', 'apnic'], default=['geoip'], nargs='*',
-                    help='IPv4 lists to use when subtracting China based IP, multiple lists can be used at the same time (default: geoip)')
+parser.add_argument('--ipv4-list', choices=['clang', 'chnroutes2', 'apnic'], default=['clang'], nargs='*',
+                    help='IPv4 lists to use when subtracting China based IP, multiple lists can be used at the same time (default: clang)')
 
 args = parser.parse_args()
 
@@ -129,8 +129,8 @@ if 'chnroutes2' in args.ipv4_list:
             a = IPv4Network(line)
             subtract_cidr(root, (a,))
 
-if 'geoip' in args.ipv4_list:
-    with open("geoip_cn.txt") as f:
+if 'clang' in args.ipv4_list:
+    with open("all_cn_cidr.txt") as f:
         for line in f:
             if ":" not in line:
                 line = line.strip('\n')

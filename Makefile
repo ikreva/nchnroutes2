@@ -7,7 +7,7 @@ next=tun0
 ## 设置需要排除的 IPv4 IPv6 ,多个IP空格隔开
 exclude=
 
-## 设置使用IPv4 中国列表，可以选择 geoip chnroutes2 apnic , 默认 geoip
+## 设置使用IPv4 中国列表，可以选择 clang chnroutes2 apnic , 默认 clang
 ipv4-list=
 
 
@@ -30,7 +30,7 @@ endif
 produce:
 	curl $(proxy) --retry 5 -C - -o ipv4-address-space.csv https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.csv
 	curl $(proxy) --retry 5 -C - -o delegated-apnic-latest https://ftp.apnic.net/stats/apnic/delegated-apnic-latest
-	curl $(proxy) --retry 5 -C - -o geoip_cn.txt https://gh.cooluc.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/text/cn.txt
+	curl $(proxy) --retry 5 -C - -o all_cn_cidr.txt https://ispip.clang.cn/all_cn_cidr.txt
 	curl $(proxy) --retry 5 -C - -o chnroutes2.txt https://gh.cooluc.com/https://raw.githubusercontent.com/misakaio/chnroutes2/master/chnroutes.txt
 
 	python3 produce.py $(next) $(exclude) $(ipv4-list)
